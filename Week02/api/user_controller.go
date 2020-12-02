@@ -1,6 +1,7 @@
 package api
 
 import (
+	"errors"
 	"errortest/dao"
 	"errortest/service"
 	"fmt"
@@ -8,7 +9,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/pkg/errors"
+	xerrors "github.com/pkg/errors"
 )
 
 func GetUser(c *gin.Context) {
@@ -26,7 +27,7 @@ func GetUser(c *gin.Context) {
 		user, err := service.GetUser(id)
 		if errors.Is(err, dao.ErrNoRecords) {
 			fmt.Println("err: ", err)
-			fmt.Printf("original error: %T %v\n", errors.Cause(err), errors.Cause(err))
+			fmt.Printf("original error: %T %v\n", xerrors.Cause(err), xerrors.Cause(err))
 			fmt.Printf("stack trace:\n%+v\n", err)
 
 			code = 500
