@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"database/sql"
+
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 )
@@ -23,13 +25,13 @@ func GetUser(c *gin.Context) {
 		}
 
 		user, err := service.GetUser(id)
-		if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
 			fmt.Println("err: ", err)
 			fmt.Printf("original error: %T %v\n", errors.Cause(err), errors.Cause(err))
 			fmt.Printf("stack trace:\n%+v\n", err)
 
 			code = 500
-			msg = err.Error()
+			msg = "No rows error"
 
 			break
 		}
