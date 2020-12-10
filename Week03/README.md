@@ -1,7 +1,7 @@
 Execute the `go run main.go` command and start three servers as below.
 
-Server1: test server 1, listen 8080 port\n
-Server2: test server 2, listen 8081 port\n
+Server1: test server 1, listen 8080 port
+Server2: test server 2, listen 8081 port
 Server3: server for shutdown the assigned server, listen 8082 port
 
 Execute `curl http://127.0.0.1:8082/close?servername=s1` and it will only shutdown Server1.
